@@ -18,6 +18,12 @@ $(document).ready(function () {
         event.preventDefault();
     });
 
+    $('[menu-toggle]').on('click', function (event) {
+        console.log('clicou');
+        $('section#navbar .menu').toggleClass('toggle');
+        $(this).toggleClass('toggle');
+    });
+
     var posicaoLimiar = $('#banners').offset().top;
 
     $(window).scroll(function (event) {

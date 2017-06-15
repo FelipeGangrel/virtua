@@ -33,6 +33,7 @@ section#navbar{
     align-items: center;
     height: 100px;
     transition: all .5s ease-in-out;
+
     .menu{
       ul{
         @extend .list-unstyled;
@@ -51,7 +52,30 @@ section#navbar{
           }
         }
       }
+      @include breakpoint(xs){
+        position: fixed;
+        right: -300px;
+        top: 0;
+        width: 200px;
+        height: 100vh;
+        background-color: #fafafa;
+        box-shadow: -2px 0px 10px 2px rgba(#333, .1);
+        transition: all .5s ease-in-out;
+        padding-top: 20px;
+        ul{
+          display: flex;
+          flex-direction: column;
+          li{
+            display: block;
+            padding: 5px 20px;
+          }
+        }
+        &.toggle{
+          right: 0;
+        }
+      }
     }
+
     .logo{
       width: 50px;
       height: 50px;
@@ -62,6 +86,27 @@ section#navbar{
         height: 100%;
         background-image: url('../../img/logo-icon.png');
       }
+    }
+  }
+
+  .menu-toggle{
+    position: absolute;
+    height: 100%;
+    width: 50px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    top: 0;
+    right: -50px;
+    color: $green_2;
+    transition: all .5s ease-in-out;
+    @include breakpoint(xs){
+      right: 0;
+    }
+    &.toggle{
+      right: 200px;
     }
   }
 }
@@ -136,6 +181,10 @@ section#banners{
       background-position: center center;
       background-repeat: no-repeat;
       font-size: 1.5rem;
+      padding: 20px 0;
+      @include breakpoint(md){
+        padding: 0 0;
+      }
       .row{
         min-height: 600px;
       }
@@ -186,7 +235,7 @@ section#intro{
     display: flex;
     align-items: center;
     padding: 50px 20px;
-    @include breakpoint(md){
+    @include breakpoint(lg){
       padding: 100px;
     }
     font-size: 1.5rem;
@@ -194,7 +243,9 @@ section#intro{
       background-color: $grey_50;
       justify-content: flex-end;
       .content{
-        max-width: 570px;
+        @include breakpoint(md){
+            max-width: 570px;
+        }
       }
     }
     &.coluna-2{ 
