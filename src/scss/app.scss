@@ -10,8 +10,57 @@ html, body {
   color: $grey_700;
 }
 
-.hexagon:before{
+/*.hexagon:before{
   content: "\2B22";
+}*/
+
+$hexagon_big: 70px;
+$hexagon_small: 50px;
+$hexagon_color: $green_1;
+$hexagon_hover_color: $green_2;
+.hexagon {
+  position: relative;
+  width: $hexagon_big; 
+  height: ($hexagon_big * 0.5774);
+  background-color: $hexagon_color;
+  margin: ($hexagon_big * 0.2887) 0;
+  font-size: ($hexagon_big * 0.5774);
+  line-height: ($hexagon_big * 0.5774);
+  color: #FFFFFF;
+  text-align: center;
+  cursor: pointer;
+  &:after,
+  &:before{
+    content: "";
+    position: absolute;
+    width: 0;
+    border-left: ($hexagon_big / 2) solid transparent;
+    border-right: ($hexagon_big / 2) solid transparent;
+    left: 0px;
+  }
+  &:before{
+    bottom: 100%;
+    border-bottom: ($hexagon_big * 0.2887) solid $hexagon_color;
+  }
+  &:after{
+    top: 100%;
+    width: 0;
+    border-top: ($hexagon_big * 0.2887) solid $hexagon_color;
+  }
+}
+
+.hexagon, .hexagon::before, .hexagon:after{
+  transition: all .5s ease-in-out;
+}
+
+.hexagon:hover{
+  background-color: $hexagon_hover_color;
+  &:after{
+    border-top-color: $hexagon_hover_color;
+  }
+  &:before{
+    border-bottom-color: $hexagon_hover_color;
+  }
 }
 
 .btn{
@@ -134,47 +183,69 @@ section#start{
   align-items: center;
   height: 100vh;
   background-color: $grey_50;
-  // background-image: url('../../img/start-bg.png');
-  // background-repeat: no-repeat;
-  // background-position: center center;
   position: relative;
   div.logo{
     width: 256px;
-    height: 164px;
+    height: 200px;
     a{
       display: block;
       widows: 100%;
       height: 100%;
       background-image: url('../../img/logo.png');
+      background-repeat: no-repeat;
+      background-origin: center center;
     }
   }
+
   div.proximo{
     position: absolute;
     bottom: 50px;
     z-index: 9;
-    width: 100px;
-    height: 100px;
-    font-size: 100px;
-    text-align: center;
-    color: $green_1;
-    cursor: pointer;
-    @extend .hexagon;
-    &:hover{
-      transition: color .5s ease-in-out;
-      color: $green_2;
-    }
-    div.icone{
-      width: 100px;
-      height: 100px;
-      position: absolute;
-      left: 0;
-      top: 30px;
-      text-align: center;
-      line-height: 100px;
-      font-size: 30px;
-      color: $grey_50;
-    }
+    width: $hexagon_big;
+    height: $hexagon_big;
   }
+
+  @include breakpoint(xs){
+    div.logo{
+      width: 160px;
+      a{
+        background-size: 80%;
+      }
+    }
+    div.proximo{
+      width: $hexagon_small;
+      height: $hexagon_small;
+      .hexagon {
+        width: $hexagon_small; 
+        height: ($hexagon_small * 0.5774);
+        margin: ($hexagon_small * 0.2887) 0;
+        font-size: ($hexagon_small * 0.5774);
+        line-height: ($hexagon_small * 0.5774);
+        &:after,
+        &:before{
+          border-left: ($hexagon_small / 2) solid transparent;
+          border-right: ($hexagon_small / 2) solid transparent;
+        }
+        &:before{
+          border-bottom: ($hexagon_small * 0.2887) solid $hexagon_color;
+        }
+        &:after{
+          border-top: ($hexagon_small * 0.2887) solid $hexagon_color;
+        }
+      }
+
+      .hexagon:hover{
+        background-color: $hexagon_hover_color;
+        &:after{
+          border-top-color: $hexagon_hover_color;
+        }
+        &:before{
+          border-bottom-color: $hexagon_hover_color;
+        }
+      }
+    }
+    
+  } 
 }
 
 section#banners{
